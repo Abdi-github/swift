@@ -1,0 +1,26 @@
+{
+  "cv": "Download CV",
+  "greet": "Hello I'm",
+  "lets": "Let's talk",
+  "education": "Education",
+  "about": "About me",
+  "eduDesc": "Certificate of Advanced Studies HES-SO in WEB Application Development as Part of Master of Advanced Studies in Rapid  Application Development(MASRAD)",
+  "eduBSC": "B.Sc in Civil Engineering",
+
+  "aboutDesc": "I am a skilled full-stack developer with expertise in both front-end and back-end technologies, including modern JavaScript frameworks, PHP frameworks, and database management systems. My experience spans the entire development cycle - from creating responsive and user-friendly interfaces to designing robust server architectures. I have successfully developed and deployed several high-performance applications, hosted on my private VPS server.",
+  "skills": "Skills",
+  "portfolio": "Portfolio",
+  "workTogether": "Let's work together!",
+  "contactDesc": "I’m currently open to new opportunities and would love to discuss how I can contribute to your team. Feel free to contact me directly via the form below, or through any of the provided channels. I’ll respond promptly!",
+  "sendMsg": "Send a message",
+  "subject": "Please write the subject",
+  "name": "Please enter your name or your enterprise name",
+  "email": "Please enter your email address.",
+  "message": "Please Write your email content here...",
+  "sending": "Sending...",
+  "emailSent": "Email Sent",
+  "sendMeEmail": "Send me an email",
+
+  "emailRec": "Email Sent successfully",
+  "emailRecDetail": "Thank you contacting me. I will response to your mail as soon as possible."
+}

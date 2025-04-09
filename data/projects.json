@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Ecommerce",
+    "tags": ["React", "Mongo DB", "Node", "express"],
+    "description": "A web application built using React and Node.js.",
+    "githubLink": "https://github.com/project1",
+    "webLink": "https://www.project1.com",
+    "photo": "/images/netflix.jpg"
+  },
+  {
+    "name": "Ecommerce",
+    "tags": ["React", "Mongo DB", "Node", "express"],
+    "description": "A web application built using React and Node.js.",
+    "githubLink": "https://github.com/project1",
+    "webLink": "https://www.project1.com",
+    "photo": "/images/1.jpg"
+  },
+  {
+    "name": "Ecommerce",
+    "tags": ["React", "Mongo DB", "Node", "express"],
+    "description": "A web application built using React and Node.js. lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "githubLink": "https://github.com/project1",
+    "webLink": "https://www.project1.com",
+    "photo": "/images/2.jpg"
+  },
+  {
+    "name": "Ecommerce",
+    "tags": ["React", "Mongo DB", "Node", "express"],
+    "description": "A web application built using React and Node.js.",
+    "githubLink": "https://github.com/project1",
+    "webLink": "https://www.project1.com",
+    "photo": "/images/3.jpg"
+  },
+  {
+    "name": "Blog",
+    "tags": ["React", "mysql", "Laravel", "express"],
+    "description": "A web application built using React and Node.js.",
+    "githubLink": "https://github.com/project1",
+    "webLink": "https://www.project1.com",
+    "photo": "/images/4.jpg"
+  },
+  {
+    "name": "Hotel",
+    "tags": ["nextjs", "mysql", "symfony"],
+    "description": "A mobile app developed using Flutter framework.",
+    "githubLink": "https://github.com/project2",
+    "webLink": "https://www.project2.com",
+    "photo": "/images/5.jpg"
+  },
+  {
+    "name": "Some",
+    "tags": ["angular", "tailwind", "mysql", "symfony"],
+    "description": "A data analysis project using Python and pandas library.",
+    "githubLink": "https://github.com/project3",
+    "webLink": "https://www.project3.com",
+    "photo": "/images/6.jpg"
+  }
+]

@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  /* Colors */
+  --color-primary: #4db5ff;
+  --color-primary-dark: #4db5ff66;
+  --color-bg: #1f1f38;
+  --color-bg-dark: #2c2c6c;
+  --color-bg-light: #1f1f3890;
+  --color-white: #fff;
+  --color-muted: #ffffff99;
+  --color-muted-light: ####d3d3d3;
+  --transition: all 400ms ease;
+
+  /* Typography */
+  --font-family-sans: "Open Sans", sans-serif; /* Default sans-serif font */
+  --font-family-roboto: "Roboto", sans-serif;
+  --font-family-openSans: "Open Sans", sans-serif;
+
+  /* Background images */
+  --bg-image: url("/bg-texture.png");
+
+  /* Screens */
+  --breakpoint-largePhone: 576px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1280px;
+}
+
+/* Apply base styles */
+body {
+  scrollbar-color: var(--color-bg) var(--color-bg-dark);
+  background-image: var(--bg-image);
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-family-sans);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family-roboto);
+}
+
+h5,
+h6,
+p,
+span,
+button {
+  font-family: var(--font-family-openSans);
+}

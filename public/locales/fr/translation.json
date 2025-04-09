@@ -1,0 +1,23 @@
+{
+  "cv": "Télécharger CV",
+  "greet": "Bonjour je suis",
+  "lets": "Parlons",
+  "about": "À propos de moi",
+  "education": "Éducation",
+  "eduDesc": "Certificat of Advanced Studies HES-SO en développement d'applications WEB dans le cadre du Master of Advanced Studies en développement rapide d'applications (MASRAD)",
+  "eduBSC": "B.Sc en génie civil",
+  "aboutDesc": "Je suis un développeur full-stack compétent avec une expertise à la fois en technologies front-end et back-end, incluant les frameworks JavaScript modernes, les frameworks PHP et les systèmes de gestion de bases de données. Mon expérience couvre l'ensemble du cycle de développement - de la création d'interfaces réactives et conviviales à la conception d'architectures serveur robustes. J'ai développé et déployé avec succès plusieurs applications hautes performances, hébergées sur mon serveur VPS privé.",
+  "skills": "Compétences",
+  "portfolio": "Portfolio",
+  "workTogether": "Travaillons ensemble!",
+  "contactDesc": "Je suis ouvert à de nouvelles opportunités et serais ravi d’échanger sur comment je pourrais contribuer à votre équipe. Contactez-moi directement via le formulaire ci-dessous ou par l’un des canaux indiqués. Je vous répondrai rapidement!",
+  "subject": "Veuillez écrire le sujet",
+  "name": "Veuillez entrer votre nom ou le nom de votre entreprise",
+  "email": "Veuillez entrer votre adresse email.",
+  "message": "Veuillez écrire le contenu de votre email ici...",
+  "sending": "Envoi en cours...",
+  "emailSent": "Email envoyé",
+  "sendMeEmail": "Envoyez-moi un email",
+  "emailRec": "Email envoyé avec succès",
+  "emailRecDetail": "Merci de m'avoir contacté. Je répondrai à votre email dès que possible."
+}
