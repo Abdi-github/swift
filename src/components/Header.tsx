@@ -48,7 +48,7 @@ const Header: FC = () => {
 
         <div className="grid grid-cols-1 gap-3 tablet:grid-cols-2 tablet:gap-4">
           <button className=" px-3 py-2 border border-primary rounded-md text-primary hover:bg-white hover:text-bg hover:border-transparent font-semibold ">
-            <a href="/cvvv.pdf" download="cvvv">
+            <a href="/2_cv_fr-edit.pdf" download="2_cv_fr-edit">
               {t("cv")}
             </a>
           </button>
