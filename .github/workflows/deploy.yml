@@ -1,11 +1,5 @@
 name: Deploy React App to VPS
 
-env:
-    VITE_APP_I18NEXUS_KEY: ${{ secrets.VITE_APP_I18NEXUS_KEY }}
-    VITE_APP_EMAIL_PUBLIC_KEY: ${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
-    VITE_APP_EMAIL_SERVICE_ID: ${{ secrets.VITE_APP_EMAIL_SERVICE_ID }}
-    VITE_APP_EMAIL_TEMPLATE_ID: ${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
-
 on:
   push:
     branches: [main]
@@ -25,22 +19,28 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-
-
       - name: Prepare VPS project directory
         run: |
-            ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
-            "mkdir -p /home/${{ secrets.VPS_USER }}/projects/swift"    
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+          "mkdir -p /home/${{ secrets.VPS_USER }}/projects/swift"
 
-      # 5. Sync project files - added exclusion of .env files
+      - name: Create .env.production on VPS
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
+            cat <<EOT > /home/${{ secrets.VPS_USER }}/projects/swift/.env.production
+            VITE_APP_I18NEXUS_KEY=${{ secrets.VITE_APP_I18NEXUS_KEY }}
+            VITE_APP_EMAIL_PUBLIC_KEY=${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
+            VITE_APP_EMAIL_SERVICE_ID=${{ secrets.VITE_APP_EMAIL_SERVICE_ID }}
+            VITE_APP_EMAIL_TEMPLATE_ID=${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
+            EOT
+            EOF
+
       - name: Sync project files to VPS
         run: |
-            rsync -avz --exclude={'.git','.github','node_modules','*.env*'} \
-            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            ./ \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/projects/swift/
-        
-    
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' \
+          -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" ./ \
+          ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/projects/swift/
+
       - name: Deploy on VPS (Docker Compose Build & Up)
         run: |
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<'EOF'
