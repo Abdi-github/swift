@@ -1,5 +1,11 @@
 name: Deploy React App to VPS
 
+env:
+    VITE_APP_I18NEXUS_KEY: ${{ secrets.VITE_APP_I18NEXUS_KEY }}
+    VITE_APP_EMAIL_PUBLIC_KEY: ${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
+    VITE_APP_EMAIL_SERVICE_ID: ${{ secrets.VITE_APP_EMAIL_SERVICE_ID }}
+    VITE_APP_EMAIL_TEMPLATE_ID: ${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
+
 on:
   push:
     branches: [main]
@@ -26,24 +32,6 @@ jobs:
             ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
             "mkdir -p /home/${{ secrets.VPS_USER }}/projects/swift"    
 
-      # 4. Create .env.production - MAJOR IMPROVEMENT:
-      #    - Now creates file in same directory as compose file
-      #    - Sets strict permissions
-      #    - Verifies file creation
-      - name: Create .env.production on VPS
-        run: |
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<'EOF'
-            cd /home/${{ secrets.VPS_USER }}/projects/swift
-            cat <<EOT > .env.production
-            VITE_APP_I18NEXUS_KEY=${{ secrets.VITE_APP_I18NEXUS_KEY }}
-            VITE_APP_EMAIL_PUBLIC_KEY=${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
-            VITE_APP_EMAIL_SERVICE_ID=${{ secrets.VITE_APP_EMAIL_SERVICE_ID }}
-            VITE_APP_EMAIL_TEMPLATE_ID=${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
-            EOT
-            chmod 600 .env.production  # Restrict permissions
-            ls -la .env.production  # Verify file creation
-          EOF
-
       # 5. Sync project files - added exclusion of .env files
       - name: Sync project files to VPS
         run: |
@@ -52,35 +40,11 @@ jobs:
             ./ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/projects/swift/
         
-            
-            
-
-
-      # 6. Deploy - CRITICAL IMPROVEMENT:
-      #    - Added explicit path to .env.production
-      #    - Added verification step
+    
       - name: Deploy on VPS (Docker Compose Build & Up)
         run: |
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<'EOF'
             cd /home/${{ secrets.VPS_USER }}/projects/swift
-            
-            # Verify environment file exists with correct content
-            if [ ! -f .env.production ]; then
-              echo "ERROR: .env.production missing!"
-              exit 1
-            fi
-            
-            echo "=== Current directory contents ==="
-            ls -la
-            
-            echo "=== .env.production content ==="
-            head -n 5 .env.production
-            
-            # Deploy with compose
             docker compose -f compose.prod.yml down
             docker compose -f compose.prod.yml up -d --build --force-recreate
-            
-            # Verify container has environment variables
-            echo "=== Container environment ==="
-            docker exec app-prod printenv | grep VITE_
           EOF
