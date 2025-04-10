@@ -32,7 +32,7 @@ jobs:
 
       - name: Create .env.production on VPS
         run: |
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
+            ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
             cat <<EOT > /home/${{ secrets.VPS_USER }}/projects/swift/.env.production
             VITE_APP_I18NEXUS_KEY=${{ secrets.VITE_APP_I18NEXUS_KEY }}
             VITE_APP_EMAIL_PUBLIC_KEY=${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
@@ -40,6 +40,7 @@ jobs:
             VITE_APP_EMAIL_TEMPLATE_ID=${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
             EOT
             EOF
+
 
       - name: Sync project files to VPS
         run: |
