@@ -1,0 +1,50 @@
+name: Deploy React App to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create .env.production file
+        run: |
+          cat <<EOF > .env.production
+          VITE_APP_I18NEXUS_KEY=${{ secrets.VITE_APP_I18NEXUS_KEY }}
+          VITE_APP_EMAIL_PUBLIC_KEY=${{ secrets.VITE_APP_EMAIL_PUBLIC_KEY }}
+          VITE_APP_EMAIL_SERVICE_ID=${{ secrets.VITE_APP_EMAIL_SERVICE_ID }}
+          VITE_APP_EMAIL_TEMPLATE_ID=${{ secrets.VITE_APP_EMAIL_TEMPLATE_ID }}
+          EOF
+
+      - name: Build React App
+        run: |
+          npm ci
+          npm run build
+
+      - name: Prepare VPS directory
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no abdi@${{ secrets.VPS_HOST }} "mkdir -p /home/abdi/projects/swift"
+
+      - name: Copy project to VPS
+        run: |
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" ./ abdi@${{ secrets.VPS_HOST }}:/home/abdi/projects/swift/
+
+      - name: Deploy on VPS
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no abdi@${{ secrets.VPS_HOST }} << 'EOF'
+            cd /home/abdi/projects/swift
+            docker compose -f compose.prod.yml down
+            docker compose -f compose.prod.yml up -d --build
+          EOF
