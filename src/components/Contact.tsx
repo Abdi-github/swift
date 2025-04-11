@@ -38,6 +38,10 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
+    console.log("Env Vars:");
+    console.log("SERVICE ID:", import.meta.env.VITE_APP_EMAIL_SERVICE_ID);
+    console.log("TEMPLATE ID:", import.meta.env.VITE_APP_EMAIL_TEMPLATE_ID);
+    console.log("PUBLIC KEY:", import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY);
     // console.log(import.meta.env.VITE_APP_EMAIL_SERVICE_ID);
     emailjs
       .sendForm(
