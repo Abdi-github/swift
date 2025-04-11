@@ -22,5 +22,5 @@
   "sendMeEmail": "Send me an email",
 
   "emailRec": "Email Sent successfully",
-  "emailRecDetail": "Thank you contacting me. I will response to your mail as soon as possible."
+  "emailRecDetail": "Thank you, {{name}}, for contacting me. I will respond to your mail as soon as possible."
 }

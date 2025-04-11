@@ -19,5 +19,5 @@
   "emailSent": "Email envoyé",
   "sendMeEmail": "Envoyez-moi un email",
   "emailRec": "Email envoyé avec succès",
-  "emailRecDetail": "Merci de m'avoir contacté. Je répondrai à votre email dès que possible."
+  "emailRecDetail": "Merci, {{name}}, de m'avoir contacté. Je répondrai à votre mail dès que possible."
 }

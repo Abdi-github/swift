@@ -25,6 +25,8 @@ type FormData = {
 const Contact = () => {
   const { t } = useTranslation();
 
+  const [senderName, setSenderName] = useState<string>("");
+
   const {
     register,
     handleSubmit,
@@ -37,11 +39,11 @@ const Contact = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    console.log("Env Vars:");
-    console.log("SERVICE ID:", import.meta.env.VITE_APP_EMAIL_SERVICE_ID);
-    console.log("TEMPLATE ID:", import.meta.env.VITE_APP_EMAIL_TEMPLATE_ID);
-    console.log("PUBLIC KEY:", import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY);
+    setSenderName(data.name);
+    // console.log("Env Vars:");
+    // console.log("SERVICE ID:", import.meta.env.VITE_APP_EMAIL_SERVICE_ID);
+    // console.log("TEMPLATE ID:", import.meta.env.VITE_APP_EMAIL_TEMPLATE_ID);
+    // console.log("PUBLIC KEY:", import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY);
     // console.log(import.meta.env.VITE_APP_EMAIL_SERVICE_ID);
     emailjs
       .sendForm(
@@ -248,7 +250,7 @@ const Contact = () => {
               </DialogDescription> */}
             </DialogHeader>
             <div className="py-4">
-              <p>{t("emailRecDetail")}</p>
+              <p>{t("emailRecDetail", { name: senderName })}</p>
             </div>
           </DialogContent>
         </Dialog>

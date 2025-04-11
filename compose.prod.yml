@@ -8,7 +8,7 @@ services:
     #   - "80:80"
     # env_file:
     #   - .env
-
+    restart: unless-stopped
     networks:
       - traefik_proxy
     labels:
